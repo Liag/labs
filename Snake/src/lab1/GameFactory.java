@@ -11,7 +11,7 @@ public class GameFactory implements IGameFactory {
 	 */
 	@Override
 	public String[] getGameNames() {
-		return new String[] { "Snake" };
+		return new String[] { "Gold", "Snake" };
 	}
 
 	/**
@@ -24,7 +24,9 @@ public class GameFactory implements IGameFactory {
 	 */
 	@Override
 	public GameModel createGame(final String gameName) {
-		if (gameName.equals("Snake")) {
+		if (gameName.equals("Gold")) {
+			return new GoldModel();
+		} else if (gameName.equals("Snake")) {
 			return new SnakeModel();
 		}
 
