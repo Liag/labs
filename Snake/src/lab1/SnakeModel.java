@@ -66,7 +66,7 @@ public class SnakeModel extends GameModel
 	/** Something */
 	private boolean foodEaten = false;
 	/** Something */
-	private Position lastPos;
+	private Position lastSnakeTilePos;
 
 	/**
 	 * Create a new model for the gold game.
@@ -83,7 +83,7 @@ public class SnakeModel extends GameModel
 
 		// Insert the collector in the middle of the gameboard.
 		this.snakeHeadPos = new Position(size.width / 2, size.height / 2);
-		this.lastPos = this.snakeHeadPos;
+		this.lastSnakeTilePos = this.snakeHeadPos;
 		setGameboardState(this.snakeHeadPos, FOOD_TILE);
 
 		// Insert coins into the gameboard.
@@ -153,26 +153,37 @@ public class SnakeModel extends GameModel
 				this.snakeHeadPos.getY() + this.direction.getYDelta());
 	}
 	
+	private void moveSnake(Position oldSnakeHeadPos) {
+		this.snakeHeadPos = getNextSnakePos();
+		if (snakeBody.size() > 0 ) {
+			for (int i = snakeBody.size() - 1; i >= 0; i--) {
+				if (i != 0) 
+					snakeBody.set(i, snakeBody.get(i - 1)); 
+				else 
+					snakeBody.set(i, oldSnakeHeadPos); 
+			}
+		}
+	}
+	
+	private void drawSnake() {
+		setGameboardState(this.snakeHeadPos, SNAKE_HEAD_TILE);
+		for (int i = 0; i < snakeBody.size(); i++) {
+			setGameboardState(snakeBody.get(i), SNAKE_BODY_TILE);
+		}
+	}
+	
 	@Override
 	public void gameUpdate(int lastKey) throws GameOverException
 	{	
 		updateDirection(lastKey);
 		
-		//Assigns the position of the last snake "bit" to lastPos before
-		lastPos = snakeBody.size() > 0 ? snakeBody.get(snakeBody.size() - 1) : this.snakeHeadPos;
-
+		// save the position of the last snake tile
+		lastSnakeTilePos = snakeBody.size() > 0 ? snakeBody.get(snakeBody.size() - 1) : this.snakeHeadPos;
+		// save the old snake head position before moving the snake
 		Position oldSnakeHeadPos = this.snakeHeadPos;
-		this.snakeHeadPos = getNextSnakePos();
 		
-		if (snakeBody.size() > 0 ) {
-			for (int i = snakeBody.size() - 1; i >= 0; i--) {
-				if ( i != 0) {
-					snakeBody.set(i, snakeBody.get(i - 1)); 
-				} else {
-					snakeBody.set(i, oldSnakeHeadPos); 
-				}
-			}
-		}
+		// move the whole snake
+		moveSnake(oldSnakeHeadPos);
 		
 		if (isOutOfBounds(this.snakeHeadPos)) {
 			throw new GameOverException(this.score);
@@ -187,21 +198,19 @@ public class SnakeModel extends GameModel
 			}
 		}
 		
+		// if food eaten make the snake longer
 		if (foodEaten) {
-			snakeBody.add(lastPos);
+			snakeBody.add(lastSnakeTilePos);
 			foodEaten = false;
 		} else {
 			// Erase the previous position.
-			setGameboardState(this.lastPos, BLANK_TILE);
-		}
-		
-		// Draw the snake
-		setGameboardState(this.snakeHeadPos, SNAKE_HEAD_TILE);
-		for (int i = 0; i < snakeBody.size(); i++) {
-			setGameboardState(snakeBody.get(i), SNAKE_BODY_TILE);
+			setGameboardState(this.lastSnakeTilePos, BLANK_TILE);
 		}
 
-		// Remove the coin at the new collector position (if any)
+		// draw the snake
+		drawSnake();
+		
+		// remove food at snake head position if any
 		if (this.food.remove(this.snakeHeadPos)) {
 			foodEaten = true;
 			this.score++;
