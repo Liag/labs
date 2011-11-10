@@ -35,15 +35,15 @@ public class SnakeModel extends GameModel
 	private static final int FOOD_START_AMOUNT = 1;
 	
 	/** Graphical representation of food. */
-	private static final GameTile FOOD_TILE = new RoundTile(new Color(255, 215,
+	private static final GameTile FOOD_TILE = new RoundTile(new Color(0, 0,
 			0),
-			new Color(255, 255, 0), 2.0);
+			new Color(0, 255, 255), 2.0);
 	
 	/** Graphical representation of the snake head */
-	private static final GameTile SNAKE_HEAD_TILE = new RoundTile(Color.BLACK,
+	private static final GameTile SNAKE_HEAD_TILE = new SnakeTile(Color.BLACK,
 			Color.RED, 2.0);
 	
-	private static final GameTile SNAKE_BODY_TILE = new RoundTile(Color.BLACK,
+	private static final GameTile SNAKE_BODY_TILE = new SnakeTile(Color.BLACK,
 			Color.GREEN, 2.0);
 	
 	/** Graphical representation of a blank tile. */
@@ -97,18 +97,33 @@ public class SnakeModel extends GameModel
 	 * according to the user's keypress.
 	 */
 	private void updateDirection(final int key) {
+		//Check if the snake is only the head, 
+		//in which case you can turn the opposite way
+		boolean oneTile = false;
+		if(snakeBody.isEmpty()) {
+			oneTile = true;
+		}
 		switch (key) {
+
 			case KeyEvent.VK_LEFT:
-				this.direction = Directions.WEST;
+				if(oneTile || this.direction != Directions.EAST) {
+					this.direction = Directions.WEST;
+				}
 				break;
 			case KeyEvent.VK_UP:
-				this.direction = Directions.NORTH;
+				if(oneTile || this.direction != Directions.SOUTH) {
+					this.direction = Directions.NORTH;
+				}
 				break;
 			case KeyEvent.VK_RIGHT:
-				this.direction = Directions.EAST;
+				if(oneTile || this.direction != Directions.WEST) {
+					this.direction = Directions.EAST;
+				}
 				break;
 			case KeyEvent.VK_DOWN:
-				this.direction = Directions.SOUTH;
+				if(oneTile || this.direction != Directions.NORTH) {
+					this.direction = Directions.SOUTH;
+				}
 				break;
 			default:
 				// Don't change direction if another key is pressed
