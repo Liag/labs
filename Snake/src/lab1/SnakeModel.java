@@ -63,9 +63,9 @@ public class SnakeModel extends GameModel
 	/** The number of food eaten. */
 	private int score;
 	
-	/** Something */
+	/** For knowing when to make the snake longer */
 	private boolean foodEaten = false;
-	/** Something */
+	/** The position of the last tile of the snake */
 	private Position lastSnakeTilePos;
 
 	/**
@@ -81,12 +81,12 @@ public class SnakeModel extends GameModel
 			}
 		}
 
-		// Insert the collector in the middle of the gameboard.
+		// Insert the snake in the middle of the gameboard.
 		this.snakeHeadPos = new Position(size.width / 2, size.height / 2);
 		this.lastSnakeTilePos = this.snakeHeadPos;
 		setGameboardState(this.snakeHeadPos, FOOD_TILE);
 
-		// Insert coins into the gameboard.
+		// Insert food onto the gameboard.
 		for (int i = 0; i < FOOD_START_AMOUNT; i++) {
 			addFood();
 		}
