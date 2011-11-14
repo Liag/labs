@@ -7,15 +7,34 @@ public class Line implements GeometricalForm {
 
 	private Point position;
 	
+	private Point pos2;
+	
 	private Color color;
-
 	
 	
+	/**
+	 * Construct a line from two positions and a colour. 
+	 * 
+	 * @param x1 Horizontal first position of the line.
+	 * @param y1 Vertical first position of the line.
+	 * @param x2 Horizontal second position of the line.
+	 * @param y2 Vertical second position of the line.
+	 * @param c The colour of the line.
+	 * @throws IllegalPositionException if any coordinate 
+	 * 									is negative.
+	 */
 	public Line( int x1, int y1, int x2, int y2, Color c )
 	           throws IllegalPositionException {
 		  
 	}
 	  
+	/**
+	 * Construct a line from two GeometricalForms and a colour. 
+	 * 
+	 * @param f1 Form with coordinates for first position.
+	 * @param f2 Form with coordinates for second position.
+	 * @param c The colour of the line.
+	 */
 	public Line( GeometricalForm f1, GeometricalForm f2, Color c ) {
 		  
 	}

@@ -11,12 +11,30 @@ public class Square implements GeometricalForm {
 	
 	private int side;
 	
-	
+	/**
+	 * Construct a square from a position, 
+	 * a side length and a colour.
+	 * 
+	 * @param x Horizontal position of the square.
+	 * @param y Vertical position of the square.
+	 * @param side The length of each side.
+	 * @param c The colour of the square.
+	 * @throws IllegalPositionException if any coordinate 
+	 * 									is negative.
+	 */
 	public Square( int x, int y, int side, Color c )
 	           throws IllegalPositionException {
 		  
 	}
 	
+	/**
+	 * Construct a square from a GeometricalForm, 
+	 * a side length and a colour.
+	 * 
+	 * @param f Form with coordinates for the square.
+	 * @param side The length of each side.
+	 * @param c The colour of the square.
+	 */
 	public Square( GeometricalForm f, int side, Color c ) {
 		  
 	}

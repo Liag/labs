@@ -12,11 +12,32 @@ public class Rectangle implements GeometricalForm {
 	private int width;
 	private int height;
 	
+	/**
+	 * Construct a rectangle from a position, 
+	 * width, height and colour.
+	 * 
+	 * @param x Horizontal position of the rectangle.
+	 * @param y Vertical position of the rectangle.
+	 * @param width The width of the rectangle.
+	 * @param height The height of the rectangle.
+	 * @param c The colour of the rectangle.
+	 * @throws IllegalPositionException if any coordinate 
+	 * 									is negative.
+	 */
 	public Rectangle( int x, int y, int width, int height, Color c )
 	           throws IllegalPositionException {
 		
 	}
 	  
+	/**
+	 * Construct a rectangle from a GeometricalForm, 
+	 * width, height and colour.
+	 * 
+	 * @param f Form with coordinates for the rectangle.
+	 * @param width The width of the rectangle.
+	 * @param height The height of the rectangle.
+	 * @param c The colour of the rectangle.
+	 */
 	public Rectangle( GeometricalForm f, int width, int height, Color c ) {
 		  
 	}

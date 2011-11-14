@@ -9,12 +9,26 @@ public class Point implements GeometricalForm {
 	
 	private Color color;
 	
-	
+	/**
+	 * Construct a Point from two integers and a Color.
+	 * 
+	 * @param x Horizontal position of the point.
+	 * @param y Vertical position of the point.
+	 * @param c Colour of the point.
+	 * @throws IllegalPositionException if any coordinate 
+	 * 									is negative.
+	 */
 	public Point( int x, int y, Color c )
 	           throws IllegalPositionException {
 		
 	}
 	
+	/**
+	 * Construct a Point from a GeometricalForm and a Color.
+	 * 
+	 * @param f Form with coordinates for the point.
+	 * @param c Colour of the point.
+	 */
 	public Point( GeometricalForm f, Color c ) {
 		
 	}

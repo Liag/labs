@@ -11,12 +11,30 @@ public class Circle implements GeometricalForm {
 	
 	private int radius;
 	
-	
+	/**
+	 * Construct a circle from a position, 
+	 * radius and colour.
+	 * 
+	 * @param x Horizontal position of the circle.
+	 * @param y Vertical position of the circle.
+	 * @param radius The radius of the circle.
+	 * @param c The colour of the circle.
+	 * @throws IllegalPositionException if any coordinate 
+	 * 									is negative.
+	 */
 	 public Circle( int x, int y, int radius, Color c )
 	           throws IllegalPositionException {
 		 
 	 }
 	  
+	/**
+	 * Construct a rectangle from a position, 
+	 * width, height and colour.
+	 * 
+	 * @param f Form with coordinates for the circle.
+	 * @param radius The radius of the circle.
+	 * @param c The colour of the circle.
+	 */
 	 public Circle( GeometricalForm f, int radius, Color c ) {
 		  
 	 }
