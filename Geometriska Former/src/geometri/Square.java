@@ -9,9 +9,7 @@ public class Square implements GeometricalForm {
 	
 	private Color color;
 	
-	private int area;
-	
-	private int perimeter;
+	private int side;
 	
 	
 	public Square( int x, int y, int side, Color c )

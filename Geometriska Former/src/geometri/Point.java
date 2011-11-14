@@ -9,9 +9,6 @@ public class Point implements GeometricalForm {
 	
 	private Color color;
 	
-	private int area;
-	
-	private int perimeter;
 	
 	public Point( int x, int y, Color c )
 	           throws IllegalPositionException {

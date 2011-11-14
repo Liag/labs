@@ -9,9 +9,8 @@ public class Rectangle implements GeometricalForm {
 	
 	private Color color;
 	
-	private int area;
-	
-	private int perimeter;
+	private int width;
+	private int height;
 	
 	public Rectangle( int x, int y, int width, int height, Color c )
 	           throws IllegalPositionException {

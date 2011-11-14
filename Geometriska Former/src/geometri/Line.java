@@ -8,10 +8,7 @@ public class Line implements GeometricalForm {
 	private Point position;
 	
 	private Color color;
-	
-	private int area;
-	
-	private int perimeter;
+
 	
 	
 	public Line( int x1, int y1, int x2, int y2, Color c )

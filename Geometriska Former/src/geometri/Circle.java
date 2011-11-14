@@ -9,9 +9,8 @@ public class Circle implements GeometricalForm {
 	
 	private Color color;
 	
-	private int area;
+	private int radius;
 	
-	private int perimeter;
 	
 	 public Circle( int x, int y, int radius, Color c )
 	           throws IllegalPositionException {
