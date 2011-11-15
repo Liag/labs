@@ -3,22 +3,19 @@ package geometri;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Square implements GeometricalForm {
+public class Square extends GeometricalShape {
 	
-	private Point position;
-	
-	private Color color;
-	
+	/** Sidelenght of the square */
 	private int side;
 	
 	/**
 	 * Construct a square from a position, 
-	 * a side length and a colour.
+	 * a side length and a color.
 	 * 
 	 * @param x Horizontal position of the square.
 	 * @param y Vertical position of the square.
 	 * @param side The length of each side.
-	 * @param c The colour of the square.
+	 * @param c The color of the square.
 	 * @throws IllegalPositionException if any coordinate 
 	 * 									is negative.
 	 */
@@ -29,30 +26,18 @@ public class Square implements GeometricalForm {
 	
 	/**
 	 * Construct a square from a GeometricalForm, 
-	 * a side length and a colour.
+	 * a side length and a color.
 	 * 
 	 * @param f Form with coordinates for the square.
 	 * @param side The length of each side.
-	 * @param c The colour of the square.
+	 * @param c The color of the square.
 	 */
 	public Square( GeometricalForm f, int side, Color c ) {
 		  
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int area() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int compareTo(GeometricalForm f) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -70,54 +55,9 @@ public class Square implements GeometricalForm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void move(int dx, int dy) throws IllegalPositionException {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public int perimeter() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void place(int x, int y) throws IllegalPositionException {
-		// TODO Auto-generated method stub
-
 	}
 
 }
