@@ -52,8 +52,8 @@ public class SnakeModel extends GameModel
 	private static final GameTile BLANK_TILE = new GameTile();
 
 	/** A list containing the positions of all food. */
-	private final List<Position> food = new ArrayList<Position>();
-	
+	//private final List<Position> food = new ArrayList<Position>();
+	private Position food;
 	//private final List<Position> snakeBody = new ArrayList<Position>();
 	
 	private final Deque<Position> snakeBody = new LinkedList<Position>();
@@ -149,7 +149,7 @@ public class SnakeModel extends GameModel
 
 		// ... add a new coin to the empty tile.
 		setGameboardState(newFoodPos, FOOD_TILE);
-		this.food.add(newFoodPos);
+		food = new Position(newFoodPos.getX(), newFoodPos.getY());
 	}
 	
 	/**
@@ -172,13 +172,13 @@ public class SnakeModel extends GameModel
 				this.snakeHeadPos.getY() + this.direction.getYDelta());
 	}
 	
-	private void moveSnake(Position oldSnakeHeadPos) {
-		this.snakeHeadPos = getNextSnakePos();
+	private void moveSnake() {
+		//this.snakeHeadPos = getNextSnakePos();
 		
 		if (snakeBody.size() > 0 ) {
 			//for (int i = snakeBody.size() - 1; i >= 0; i--) {
 				//if (i != 0) 
-				    snakeBody.addFirst(new Position(oldSnakeHeadPos.getX(), oldSnakeHeadPos.getY()));
+				    snakeBody.addFirst(new Position(snakeHeadPos.getX(), snakeHeadPos.getY()));
 				    snakeBody.removeLast();
 					//snakeBody.set(i, snakeBody.get(i - 1)); 
 				//else 
@@ -202,11 +202,13 @@ public class SnakeModel extends GameModel
 		// save the position of the last snake tile
 		this.lastSnakeTilePos = snakeBody.size() > 0 ? snakeBody.getLast() : this.snakeHeadPos;
 		// save the old snake head position before moving the snake
-		Position oldSnakeHeadPos = this.snakeHeadPos;
+		//Position oldSnakeHeadPos = this.snakeHeadPos;
 		
 		// move the whole snake
 		
-		moveSnake(oldSnakeHeadPos);
+		moveSnake();
+		
+		this.snakeHeadPos = getNextSnakePos();
 		
 		if (isOutOfBounds(this.snakeHeadPos)) {
 			throw new GameOverException(this.score);
@@ -237,10 +239,14 @@ public class SnakeModel extends GameModel
 		drawSnake();
 		
 		// remove food at snake head position if any
-		if (this.food.remove(this.snakeHeadPos)) {
-			foodEaten = true;
+		if (food.equals(snakeHeadPos)) {
+			food = null;
+		    foodEaten = true;
 			this.score++;
-			addFood();
+			// Check if there is space left for food
+			if(score < ((getGameboardSize().width * getGameboardSize().height) - 1)) {
+			    addFood();
+			}
 		}
 	}
 	
