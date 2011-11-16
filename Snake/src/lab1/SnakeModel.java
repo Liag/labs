@@ -54,9 +54,9 @@ public class SnakeModel extends GameModel
 	/** A list containing the positions of all food. */
 	private final List<Position> food = new ArrayList<Position>();
 	
-	private final List<Position> snakeBody = new ArrayList<Position>();
+	//private final List<Position> snakeBody = new ArrayList<Position>();
 	
-	//private final Deque<Position> snakeBody = new LinkedList();
+	private final Deque<Position> snakeBody = new LinkedList<Position>();
 	
 	/** The position of the snake's head. */
 	private Position snakeHeadPos;
@@ -176,19 +176,21 @@ public class SnakeModel extends GameModel
 		this.snakeHeadPos = getNextSnakePos();
 		
 		if (snakeBody.size() > 0 ) {
-			for (int i = snakeBody.size() - 1; i >= 0; i--) {
-				if (i != 0) 
-					snakeBody.set(i, snakeBody.get(i - 1)); 
-				else 
-					snakeBody.set(i, oldSnakeHeadPos); 
-			}
+			//for (int i = snakeBody.size() - 1; i >= 0; i--) {
+				//if (i != 0) 
+				    snakeBody.addFirst(new Position(oldSnakeHeadPos.getX(), oldSnakeHeadPos.getY()));
+				    snakeBody.removeLast();
+					//snakeBody.set(i, snakeBody.get(i - 1)); 
+				//else 
+					//snakeBody.set(i, oldSnakeHeadPos); 
+			//}
 		}
 	}
 	
 	private void drawSnake() {
 		setGameboardState(this.snakeHeadPos, SNAKE_HEAD_TILE);
 		if ( snakeBody.size() > 0 ) {
-			setGameboardState(snakeBody.get(0), SNAKE_BODY_TILE);
+			setGameboardState(snakeBody.getFirst(), SNAKE_BODY_TILE);
 		}
 	}
 	
@@ -198,11 +200,12 @@ public class SnakeModel extends GameModel
 		updateDirection(lastKey);
 		
 		// save the position of the last snake tile
-		this.lastSnakeTilePos = snakeBody.size() > 0 ? snakeBody.get(snakeBody.size() - 1) : this.snakeHeadPos;
+		this.lastSnakeTilePos = snakeBody.size() > 0 ? snakeBody.getLast() : this.snakeHeadPos;
 		// save the old snake head position before moving the snake
 		Position oldSnakeHeadPos = this.snakeHeadPos;
 		
 		// move the whole snake
+		
 		moveSnake(oldSnakeHeadPos);
 		
 		if (isOutOfBounds(this.snakeHeadPos)) {
@@ -211,11 +214,14 @@ public class SnakeModel extends GameModel
 		
 		//Checks if the snake's head touches its body.
 		if (snakeBody.size() > 0) {
-			for (int i = 0; i < snakeBody.size(); i++) {
+			/*for (Iterator i = ; i < snakeBody.size(); i++) {
 				if (snakeHeadPos.equals(snakeBody.get(i))) {
 					throw new GameOverException(this.score);
 				}
-			}
+			}*/
+		    if(snakeBody.contains(snakeHeadPos)) {
+		        throw new GameOverException(this.score);
+		    }
 		}
 		
 		// if food eaten make the snake longer
