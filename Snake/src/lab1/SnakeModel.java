@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 public class SnakeModel extends GameModel
@@ -53,6 +55,8 @@ public class SnakeModel extends GameModel
 	private final List<Position> food = new ArrayList<Position>();
 	
 	private final List<Position> snakeBody = new ArrayList<Position>();
+	
+	//private final Deque<Position> snakeBody = new LinkedList();
 	
 	/** The position of the snake's head. */
 	private Position snakeHeadPos;
@@ -170,6 +174,7 @@ public class SnakeModel extends GameModel
 	
 	private void moveSnake(Position oldSnakeHeadPos) {
 		this.snakeHeadPos = getNextSnakePos();
+		
 		if (snakeBody.size() > 0 ) {
 			for (int i = snakeBody.size() - 1; i >= 0; i--) {
 				if (i != 0) 
@@ -182,8 +187,8 @@ public class SnakeModel extends GameModel
 	
 	private void drawSnake() {
 		setGameboardState(this.snakeHeadPos, SNAKE_HEAD_TILE);
-		for (int i = 0; i < snakeBody.size(); i++) {
-			setGameboardState(snakeBody.get(i), SNAKE_BODY_TILE);
+		if ( snakeBody.size() > 0 ) {
+			setGameboardState(snakeBody.get(0), SNAKE_BODY_TILE);
 		}
 	}
 	
@@ -193,7 +198,7 @@ public class SnakeModel extends GameModel
 		updateDirection(lastKey);
 		
 		// save the position of the last snake tile
-		lastSnakeTilePos = snakeBody.size() > 0 ? snakeBody.get(snakeBody.size() - 1) : this.snakeHeadPos;
+		this.lastSnakeTilePos = snakeBody.size() > 0 ? snakeBody.get(snakeBody.size() - 1) : this.snakeHeadPos;
 		// save the old snake head position before moving the snake
 		Position oldSnakeHeadPos = this.snakeHeadPos;
 		
