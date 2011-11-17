@@ -34,8 +34,6 @@ public class SnakeModel extends GameModel
 		}
 	}
 	
-	private static final int FOOD_START_AMOUNT = 1;
-	
 	/** Graphical representation of food. */
 	private static final GameTile FOOD_TILE = new RoundTile(new Color(0, 0,
 			0),
@@ -51,10 +49,9 @@ public class SnakeModel extends GameModel
 	/** Graphical representation of a blank tile. */
 	private static final GameTile BLANK_TILE = new GameTile();
 
-	/** A list containing the positions of all food. */
-	//private final List<Position> food = new ArrayList<Position>();
+	/** Contains the position of the food tile */
 	private Position food;
-	//private final List<Position> snakeBody = new ArrayList<Position>();
+
 	
 	private final Deque<Position> snakeBody = new LinkedList<Position>();
 	
@@ -91,9 +88,7 @@ public class SnakeModel extends GameModel
 		setGameboardState(this.snakeHeadPos, FOOD_TILE);
 
 		// Insert food onto the gameboard.
-		for (int i = 0; i < FOOD_START_AMOUNT; i++) {
 			addFood();
-		}
 	}
 	
 	/**
@@ -172,18 +167,10 @@ public class SnakeModel extends GameModel
 				this.snakeHeadPos.getY() + this.direction.getYDelta());
 	}
 	
-	private void moveSnake() {
-		//this.snakeHeadPos = getNextSnakePos();
-		
+	private void moveSnake() {		
 		if (snakeBody.size() > 0 ) {
-			//for (int i = snakeBody.size() - 1; i >= 0; i--) {
-				//if (i != 0) 
-				    snakeBody.addFirst(new Position(snakeHeadPos.getX(), snakeHeadPos.getY()));
-				    snakeBody.removeLast();
-					//snakeBody.set(i, snakeBody.get(i - 1)); 
-				//else 
-					//snakeBody.set(i, oldSnakeHeadPos); 
-			//}
+			snakeBody.addFirst(new Position(snakeHeadPos.getX(), snakeHeadPos.getY()));
+		    snakeBody.removeLast();
 		}
 	}
 	
@@ -201,11 +188,8 @@ public class SnakeModel extends GameModel
 		
 		// save the position of the last snake tile
 		this.lastSnakeTilePos = snakeBody.size() > 0 ? snakeBody.getLast() : this.snakeHeadPos;
-		// save the old snake head position before moving the snake
-		//Position oldSnakeHeadPos = this.snakeHeadPos;
 		
-		// move the whole snake
-		
+		// move the snake
 		moveSnake();
 		
 		this.snakeHeadPos = getNextSnakePos();
@@ -216,11 +200,6 @@ public class SnakeModel extends GameModel
 		
 		//Checks if the snake's head touches its body.
 		if (snakeBody.size() > 0) {
-			/*for (Iterator i = ; i < snakeBody.size(); i++) {
-				if (snakeHeadPos.equals(snakeBody.get(i))) {
-					throw new GameOverException(this.score);
-				}
-			}*/
 		    if(snakeBody.contains(snakeHeadPos)) {
 		        throw new GameOverException(this.score);
 		    }
