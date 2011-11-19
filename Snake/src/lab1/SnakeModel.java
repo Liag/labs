@@ -53,6 +53,7 @@ public class SnakeModel extends GameModel
 	private Position food;
 
 	
+	/** Deque containing the position of snakebody tiles  */
 	private final Deque<Position> snakeBody = new LinkedList<Position>();
 	
 	/** The position of the snake's head. */
