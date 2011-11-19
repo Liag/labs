@@ -60,16 +60,24 @@ public abstract class GeometricalShape implements GeometricalForm {
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
 		// TODO Auto-generated method stub
-
+		this.x = x;
+		this.y = y;
 	}
+	
+	
 	
 	/**
 	 * Set the position of the object according to the parameters.
 	 * @param x Horizontal position of the point.
 	 * @param y Vertical position of the point.
 	 */
-	public void setPosition( int x, int y ) {
+	/*public void setPosition( int x, int y ) {
 		
 	}
+	*/
+	
+	//TODO add equals
+	
+	//TODO add hashCode
 	
 }

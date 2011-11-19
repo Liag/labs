@@ -24,6 +24,13 @@ public class Rectangle extends GeometricalShape {
 	public Rectangle( int x, int y, int width, int height, Color c )
 	           throws IllegalPositionException {
 		
+		super.place(x, y);
+		this.width = width;
+		this.height = height;
+		// Set color
+		
+		
+		
 	}
 	  
 	/**
@@ -45,7 +52,7 @@ public class Rectangle extends GeometricalShape {
 	@Override
 	public int area() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ( width * height );
 	}
 
 	/**
@@ -63,7 +70,7 @@ public class Rectangle extends GeometricalShape {
 	@Override
 	public int perimeter() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ( (2 * width) + (2 * height) );
 	}
 
 }

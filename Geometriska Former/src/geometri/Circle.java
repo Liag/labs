@@ -42,7 +42,7 @@ public class Circle extends GeometricalShape {
 	@Override
 	public int area() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ( (int) ( Math.round( (radius * radius) * Math.PI )));
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class Circle extends GeometricalShape {
 	@Override
 	public int perimeter() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ( (int) ( Math.round( (2 * radius) * Math.PI )));
 	}
 
 

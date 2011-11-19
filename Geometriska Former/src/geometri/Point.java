@@ -17,6 +17,9 @@ public class Point extends GeometricalShape {
 	public Point( int x, int y, Color c )
 	           throws IllegalPositionException {
 		
+		super.place(x, y);
+		// Set color
+		
 	}
 	
 	/**

@@ -8,7 +8,9 @@ public class Line extends GeometricalShape{
 	/** Ending point of line (x2, y2) */
 	private int x2;
 	private int y2;
-	
+
+	/** The inclination of the line */
+	private int inclination;
 	
 	/**
 	 * Construct a line from two positions and a color. 

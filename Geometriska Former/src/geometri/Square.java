@@ -39,7 +39,7 @@ public class Square extends GeometricalShape {
 	@Override
 	public int area() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ( side * side );
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class Square extends GeometricalShape {
 	@Override
 	public int perimeter() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ( 4 * side );
 	}
 
 }
