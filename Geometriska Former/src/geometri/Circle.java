@@ -21,7 +21,8 @@ public class Circle extends GeometricalShape {
 	 */
 	 public Circle( int x, int y, int radius, Color c )
 	           throws IllegalPositionException {
-		 
+		 super(x, y, c);
+		 this.radius = radius;
 	 }
 	  
 	/**
@@ -33,7 +34,8 @@ public class Circle extends GeometricalShape {
 	 * @param c The color of the circle.
 	 */
 	 public Circle( GeometricalForm f, int radius, Color c ) {
-		  
+		  super(f, c);
+		  this.radius = radius;
 	 }
 	
 	/**
@@ -51,6 +53,8 @@ public class Circle extends GeometricalShape {
 	@Override
 	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
+		g.setColor( super.getColor() );
+		g.fillOval( super.getX(), super.getY(), ( radius * 2 ) , ( radius * 2 ) );
 
 	}
 
@@ -64,5 +68,27 @@ public class Circle extends GeometricalShape {
 	}
 
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + radius;
+		return result;
+	}
 
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Circle other = (Circle) obj;
+		if (radius != other.radius)
+			return false;
+		return true;
+	}
+	
 }

@@ -16,9 +16,7 @@ public class Point extends GeometricalShape {
 	 */
 	public Point( int x, int y, Color c )
 	           throws IllegalPositionException {
-		
-		super.place(x, y);
-		// Set color
+		super(x, y, c);
 		
 	}
 	
@@ -29,7 +27,7 @@ public class Point extends GeometricalShape {
 	 * @param c Color of the point.
 	 */
 	public Point( GeometricalForm f, Color c ) {
-		
+		super(f, c);
 	}
 	
 	
@@ -48,7 +46,8 @@ public class Point extends GeometricalShape {
 	@Override
 	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
-
+		//g.setColor( super.getColor() );
+		//g.fillRect( super.getX(), super.getY(), 1, 1 );
 	}
 
 	/**
@@ -59,5 +58,7 @@ public class Point extends GeometricalShape {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
 
 }

@@ -21,6 +21,8 @@ public class Square extends GeometricalShape {
 	 */
 	public Square( int x, int y, int side, Color c )
 	           throws IllegalPositionException {
+		super(x, y, c);
+		this.side = side;
 		  
 	}
 	
@@ -33,7 +35,8 @@ public class Square extends GeometricalShape {
 	 * @param c The color of the square.
 	 */
 	public Square( GeometricalForm f, int side, Color c ) {
-		  
+		  super(f, c);
+		  this.side = side;
 	}
 	
 	@Override
@@ -48,7 +51,8 @@ public class Square extends GeometricalShape {
 	@Override
 	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
-
+		g.setColor( super.getColor() );
+		g.fillRect( super.getX(), super.getY(), side, side );
 	}
 
 	/**
@@ -59,5 +63,29 @@ public class Square extends GeometricalShape {
 		// TODO Auto-generated method stub
 		return ( 4 * side );
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + side;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Square other = (Square) obj;
+		if (side != other.side)
+			return false;
+		return true;
+	}
+	
+	
 
 }

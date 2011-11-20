@@ -23,14 +23,9 @@ public class Rectangle extends GeometricalShape {
 	 */
 	public Rectangle( int x, int y, int width, int height, Color c )
 	           throws IllegalPositionException {
-		
-		super.place(x, y);
+		super(x, y, c);
 		this.width = width;
-		this.height = height;
-		// Set color
-		
-		
-		
+		this.height = height;		
 	}
 	  
 	/**
@@ -43,7 +38,9 @@ public class Rectangle extends GeometricalShape {
 	 * @param c The color of the rectangle.
 	 */
 	public Rectangle( GeometricalForm f, int width, int height, Color c ) {
-		  
+		  super(f, c);
+		  this.width = width;
+		  this.height = height;
 	}
 	
 	/**
@@ -61,7 +58,8 @@ public class Rectangle extends GeometricalShape {
 	@Override
 	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
-
+		g.setColor( super.getColor() );
+		g.fillRect( super.getX(), super.getY(), width, height );
 	}
 
 	/**
@@ -72,5 +70,32 @@ public class Rectangle extends GeometricalShape {
 		// TODO Auto-generated method stub
 		return ( (2 * width) + (2 * height) );
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + height;
+		result = prime * result + width;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Rectangle other = (Rectangle) obj;
+		if (height != other.height)
+			return false;
+		if (width != other.width)
+			return false;
+		return true;
+	}
+	
+	
 
 }

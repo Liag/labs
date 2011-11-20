@@ -25,7 +25,10 @@ public class Line extends GeometricalShape{
 	 */
 	public Line( int x1, int y1, int x2, int y2, Color c )
 	           throws IllegalPositionException {
-		  
+		super(x1, y1, c);
+		this.x2 = x2;
+		this.y2 = y2;
+		this.inclination = ( ( this.y2 - super.getY() ) / ( this.x2 - super.getX() ) );
 	}
 	  
 	/**
@@ -36,7 +39,10 @@ public class Line extends GeometricalShape{
 	 * @param c The color of the line.
 	 */
 	public Line( GeometricalForm f1, GeometricalForm f2, Color c ) {
-		  
+		  super(f1, c);
+		  this.x2 = f2.getX();
+		  this.y2 = f2.getY();
+		  this.inclination = ( ( this.y2 - super.getY() ) / ( this.x2 - super.getX() ) );
 	}
 	
 	/**
@@ -54,7 +60,8 @@ public class Line extends GeometricalShape{
 	@Override
 	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
-
+		g.setColor( super.getColor() );
+		g.drawLine( super.getX(), super.getY(), x2, y2 );
 	}
 	
 	/**
@@ -73,7 +80,9 @@ public class Line extends GeometricalShape{
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
 		// TODO Auto-generated method stub
-
+		super.move(dx, dy);
+		this.x2 += dx;
+		this.y2 += dy;
 	}
 	
    /**
@@ -94,7 +103,15 @@ public class Line extends GeometricalShape{
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
 		// TODO Auto-generated method stub
-
+		int x1 = super.getX();
+		int y1 = super.getY();
+		
+		int xDiff = x2 - x1;
+		int yDiff = y2 - y1;
+		
+		super.place(x, y);
+		this.x2 = super.getX() + xDiff;
+		this.y2 = super.getY() + yDiff;
 	}
 
 	/**
@@ -103,7 +120,42 @@ public class Line extends GeometricalShape{
 	@Override
 	public int perimeter() {
 		// TODO Auto-generated method stub
-		return 0;
+		int xDiff = this.x2 - super.getX();
+		int yDiff = this.y2 - super.getY();
+		
+		int sideLength =  (int) Math.round( Math.sqrt( Math.pow(xDiff, 2) + Math.pow(yDiff, 2) ) );
+		
+		return sideLength;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + inclination;
+		result = prime * result + x2;
+		result = prime * result + y2;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Line other = (Line) obj;
+		if (inclination != other.inclination)
+			return false;
+		if (x2 != other.x2)
+			return false;
+		if (y2 != other.y2)
+			return false;
+		return true;
+	}
+	
+	
 
 }
