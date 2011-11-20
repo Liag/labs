@@ -30,7 +30,18 @@ public abstract class GeometricalShape implements GeometricalForm {
 	@Override
 	public int compareTo(GeometricalForm f) {
 		// TODO Auto-generated method stub
-		return 0;
+		if ( this.area() == f.area() ) {
+			if ( this.perimeter() < f.perimeter() )
+				return 0;
+			if ( this.perimeter() > f.perimeter() )
+				return 1;
+			return 2;
+		}
+		
+		if ( this.area() > f.area() )
+			return 3;
+		
+		return 4;
 	}
 	
 	/**
