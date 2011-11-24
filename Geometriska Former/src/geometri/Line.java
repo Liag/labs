@@ -10,7 +10,7 @@ public class Line extends GeometricalShape{
 	private int y2;
 
 	/** The inclination of the line */
-	private int inclination;
+	private double inclination;
 	
 	/**
 	 * Construct a line from two positions and a color. 
@@ -132,7 +132,7 @@ public class Line extends GeometricalShape{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + inclination;
+		result = prime * result + (int) inclination;
 		result = prime * result + x2;
 		result = prime * result + y2;
 		return result;
@@ -156,6 +156,9 @@ public class Line extends GeometricalShape{
 		return true;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "X1: " + super.getX() + " Y1: " + super.getY() + " X2: " + x2 + " Y2: " + y2;
+	}
 
 }

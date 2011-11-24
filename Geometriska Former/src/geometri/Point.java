@@ -59,6 +59,9 @@ public class Point extends GeometricalShape {
 		return 0;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "X: " + super.getX() + " Y: " + super.getY();
+	}
 
 }

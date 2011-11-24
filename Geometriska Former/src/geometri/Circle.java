@@ -91,4 +91,8 @@ public class Circle extends GeometricalShape {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return "X: " + super.getX() + " Y: " + super.getY() + " Radius: " + radius;
+	}
 }
