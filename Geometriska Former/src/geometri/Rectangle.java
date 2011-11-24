@@ -24,6 +24,10 @@ public class Rectangle extends GeometricalShape {
 	public Rectangle( int x, int y, int width, int height, Color c )
 	           throws IllegalPositionException {
 		super(x, y, c);
+		// if any coordinate is negative
+		if( x < 0 || y < 0 ) {
+			throw new IllegalPositionException();
+		}
 		this.width = width;
 		this.height = height;		
 	}

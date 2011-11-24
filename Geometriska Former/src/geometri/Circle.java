@@ -22,6 +22,10 @@ public class Circle extends GeometricalShape {
 	 public Circle( int x, int y, int radius, Color c )
 	           throws IllegalPositionException {
 		 super(x, y, c);
+			// if any coordinate is negative
+			if( x < 0 || y < 0 ) {
+				throw new IllegalPositionException();
+			}
 		 this.radius = radius;
 	 }
 	  

@@ -22,6 +22,10 @@ public class Square extends GeometricalShape {
 	public Square( int x, int y, int side, Color c )
 	           throws IllegalPositionException {
 		super(x, y, c);
+		// if any coordinate is negative
+		if( x < 0 || y < 0 ) {
+			throw new IllegalPositionException();
+		}
 		this.side = side;
 		  
 	}

@@ -26,6 +26,12 @@ public class Line extends GeometricalShape{
 	public Line( int x1, int y1, int x2, int y2, Color c )
 	           throws IllegalPositionException {
 		super( Math.min(x1, x2), Math.min(y1, y2), c );
+		
+		// if any coordinate is negative
+		if(x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) {
+			throw new IllegalPositionException();
+		}
+		
 		this.x2 = Math.max(x1, x2);
 		this.y2 = Math.max(y1, y2);
 		
@@ -88,6 +94,11 @@ public class Line extends GeometricalShape{
 		super.move(dx, dy);
 		this.x2 += dx;
 		this.y2 += dy;
+		
+		// if x2 or y2 is negative
+		if(x2 < 0 || y2 < 0) {
+			throw new IllegalPositionException();
+		}
 	}
 	
    /**
@@ -106,7 +117,7 @@ public class Line extends GeometricalShape{
     *                                           is negative.
     */
 	@Override
-	public void place(int x, int y) throws IllegalPositionException {
+	public void place(int x, int y) throws IllegalPositionException {		
 		int x1 = super.getX();
 		int y1 = super.getY();
 		
@@ -125,10 +136,10 @@ public class Line extends GeometricalShape{
 	public int perimeter() {
 		int xDiff = this.x2 - super.getX();
 		int yDiff = this.y2 - super.getY();
+		// the lines length
+		int lineLength =  (int) Math.round( Math.sqrt( Math.pow(xDiff, 2) + Math.pow(yDiff, 2) ) );
 		
-		int sideLength =  (int) Math.round( Math.sqrt( Math.pow(xDiff, 2) + Math.pow(yDiff, 2) ) );
-		
-		return sideLength;
+		return lineLength;
 	}
 
 	/**

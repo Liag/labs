@@ -23,7 +23,6 @@ public abstract class GeometricalShape implements GeometricalForm {
 		  this.color = c;
 	}
 	
-	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -74,6 +73,9 @@ public abstract class GeometricalShape implements GeometricalForm {
 	public void move(int dx, int dy) throws IllegalPositionException {
 		this.x += dx;
 		this.y += dy;
+		if ( this.x < 0 || this.y < 0 ) {
+			throw new IllegalPositionException();
+		}
 	}
 	
 	/**
@@ -81,6 +83,9 @@ public abstract class GeometricalShape implements GeometricalForm {
 	 */
 	@Override
 	public void place(int x, int y) throws IllegalPositionException {
+		if ( x < 0 || y < 0 ) {
+			throw new IllegalPositionException();
+		}
 		this.x = x;
 		this.y = y;
 	}
