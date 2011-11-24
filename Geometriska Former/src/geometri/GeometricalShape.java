@@ -32,16 +32,16 @@ public abstract class GeometricalShape implements GeometricalForm {
 		// TODO Auto-generated method stub
 		if ( this.area() == f.area() ) {
 			if ( this.perimeter() < f.perimeter() )
-				return 0;
+				return -2;
 			if ( this.perimeter() > f.perimeter() )
-				return 1;
-			return 2;
+				return 2;
+			return 0;
 		}
 		
 		if ( this.area() > f.area() )
-			return 3;
+			return 1;
 		
-		return 4;
+		return -1;
 	}
 	
 	/**
