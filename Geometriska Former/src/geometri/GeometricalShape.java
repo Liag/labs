@@ -58,7 +58,7 @@ public abstract class GeometricalShape implements GeometricalForm {
 	 */
 	@Override
 	public int getX() {
-		return this.y;
+		return this.x;
 	}
 	
 	/**
