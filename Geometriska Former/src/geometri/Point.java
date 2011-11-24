@@ -30,13 +30,11 @@ public class Point extends GeometricalShape {
 		super(f, c);
 	}
 	
-	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public int area() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -45,9 +43,8 @@ public class Point extends GeometricalShape {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
-		//g.setColor( super.getColor() );
-		//g.fillRect( super.getX(), super.getY(), 1, 1 );
+		g.setColor( super.getColor() );
+		g.fillRect( super.getX(), super.getY(), 1, 1 );
 	}
 
 	/**
@@ -55,13 +52,7 @@ public class Point extends GeometricalShape {
 	 */
 	@Override
 	public int perimeter() {
-		// TODO Auto-generated method stub
 		return 0;
-	}
-	
-	@Override
-	public String toString() {
-		return "X: " + super.getX() + " Y: " + super.getY();
 	}
 
 }

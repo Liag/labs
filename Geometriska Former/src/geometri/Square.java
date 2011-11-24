@@ -39,9 +39,11 @@ public class Square extends GeometricalShape {
 		  this.side = side;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int area() {
-		// TODO Auto-generated method stub
 		return ( side * side );
 	}
 
@@ -50,7 +52,6 @@ public class Square extends GeometricalShape {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
 		g.setColor( super.getColor() );
 		g.fillRect( super.getX(), super.getY(), side, side );
 	}
@@ -60,10 +61,12 @@ public class Square extends GeometricalShape {
 	 */
 	@Override
 	public int perimeter() {
-		// TODO Auto-generated method stub
 		return ( 4 * side );
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,6 +75,9 @@ public class Square extends GeometricalShape {
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -86,9 +92,12 @@ public class Square extends GeometricalShape {
 		return true;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
-		return "X: " + super.getX() + " Y: " + super.getY() + " Side: " + side;
+		return super.toString() + " Side: " + side;
 	}
 
 }

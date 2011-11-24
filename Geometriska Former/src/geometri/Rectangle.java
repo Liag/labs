@@ -48,7 +48,6 @@ public class Rectangle extends GeometricalShape {
 	 */
 	@Override
 	public int area() {
-		// TODO Auto-generated method stub
 		return ( width * height );
 	}
 
@@ -57,7 +56,6 @@ public class Rectangle extends GeometricalShape {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
 		g.setColor( super.getColor() );
 		g.fillRect( super.getX(), super.getY(), width, height );
 	}
@@ -67,10 +65,12 @@ public class Rectangle extends GeometricalShape {
 	 */
 	@Override
 	public int perimeter() {
-		// TODO Auto-generated method stub
 		return ( (2 * width) + (2 * height) );
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,6 +80,9 @@ public class Rectangle extends GeometricalShape {
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,9 +99,12 @@ public class Rectangle extends GeometricalShape {
 		return true;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
-		return "X: " + super.getX() + " Y: " + super.getY() + " Width: " + width + " Height: " + height;
+		return super.toString() + " Width: " + width + " Height: " + height;
 	}
 
 }
