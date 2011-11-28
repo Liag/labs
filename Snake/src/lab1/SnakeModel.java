@@ -3,10 +3,8 @@ package lab1;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 public class SnakeModel extends GameModel
 {
@@ -33,38 +31,38 @@ public class SnakeModel extends GameModel
 			return this.yDelta;
 		}
 	}
-	
+
 	/** Graphical representation of food. */
 	private static final GameTile FOOD_TILE = new RoundTile(new Color(0, 0,
 			0),
 			new Color(0, 255, 255), 2.0);
-	
+
 	/** Graphical representation of the snake head */
 	private static final GameTile SNAKE_HEAD_TILE = new SnakeTile(Color.BLACK,
 			Color.RED, 2.0);
-	
+
 	private static final GameTile SNAKE_BODY_TILE = new SnakeTile(Color.BLACK,
 			Color.GREEN, 2.0);
-	
+
 	/** Graphical representation of a blank tile. */
 	private static final GameTile BLANK_TILE = new GameTile();
 
 	/** Contains the position of the food tile */
 	private Position food;
 
-	
+
 	/** Deque containing the position of snakebody tiles  */
 	private final Deque<Position> snakeBody = new LinkedList<Position>();
-	
+
 	/** The position of the snake's head. */
 	private Position snakeHeadPos;
-	
+
 	/** The direction of the snake. */
 	private Directions direction = Directions.NORTH;
 
 	/** The number of food eaten. */
 	private int score;
-	
+
 	/** For knowing when to make the snake longer */
 	private boolean foodEaten = false;
 	/** The position of the last tile of the snake */
@@ -91,13 +89,13 @@ public class SnakeModel extends GameModel
 		// Insert food onto the gameboard.
 			addFood();
 	}
-	
+
 	/**
 	 * Update the direction of the snake
 	 * according to the user's keypress.
 	 */
 	private void updateDirection(final int key) {
-		//Check if the snake is only the head, 
+		//Check if the snake is only the head,
 		//in which case you can turn the opposite way
 		boolean oneTile = false;
 		if(snakeBody.isEmpty()) {
@@ -130,7 +128,7 @@ public class SnakeModel extends GameModel
 				break;
 		}
 	}
-	
+
 	/**
 	 * Insert food onto the gameboard.
 	 */
@@ -147,10 +145,10 @@ public class SnakeModel extends GameModel
 		setGameboardState(newFoodPos, FOOD_TILE);
 		food = new Position(newFoodPos.getX(), newFoodPos.getY());
 	}
-	
+
 	/**
 	 * Return whether the specified position is empty.
-	 * 
+	 *
 	 * @param pos
 	 *            The position to test.
 	 * @return true if position is empty.
@@ -167,46 +165,56 @@ public class SnakeModel extends GameModel
 				this.snakeHeadPos.getX() + this.direction.getXDelta(),
 				this.snakeHeadPos.getY() + this.direction.getYDelta());
 	}
-	
-	private void moveSnake() {		
+
+	/**
+	 * Move the snake
+	 */
+	private void moveSnake() {
 		if (snakeBody.size() > 0 ) {
+			// set the last tile to the first tile instead 
 			snakeBody.addFirst(new Position(snakeHeadPos.getX(), snakeHeadPos.getY()));
 		    snakeBody.removeLast();
 		}
 	}
-	
+
+	/**
+	 * Draw the snake
+	 */
 	private void drawSnake() {
+		// draw the head
 		setGameboardState(this.snakeHeadPos, SNAKE_HEAD_TILE);
+		// if there is a body
 		if ( snakeBody.size() > 0 ) {
+			// draw the body
 			setGameboardState(snakeBody.getFirst(), SNAKE_BODY_TILE);
 		}
 	}
-	
+
 	@Override
 	public void gameUpdate(int lastKey) throws GameOverException
-	{	
+	{
 		updateDirection(lastKey);
-		
+
 		// save the position of the last snake tile
 		this.lastSnakeTilePos = snakeBody.size() > 0 ? snakeBody.getLast() : this.snakeHeadPos;
-		
+
 		// move the snake
 		moveSnake();
-		
+
 		this.snakeHeadPos = getNextSnakePos();
-		
+
 		if (isOutOfBounds(this.snakeHeadPos)) {
 			throw new GameOverException(this.score);
 		}
-		
-		//Checks if the snake's head touches its body.
+
+		// Checks if the snake's head touches its body.
 		if (snakeBody.size() > 0) {
 		    if(snakeBody.contains(snakeHeadPos)) {
 		        throw new GameOverException(this.score);
 		    }
 		}
-		
-		// if food eaten make the snake longer
+
+		// If food eaten make the snake longer
 		if (foodEaten) {
 			snakeBody.add(lastSnakeTilePos);
 			foodEaten = false;
@@ -217,7 +225,7 @@ public class SnakeModel extends GameModel
 
 		// draw the snake
 		drawSnake();
-		
+
 		// remove food at snake head position if any
 		if (food.equals(snakeHeadPos)) {
 			food = null;
@@ -229,9 +237,9 @@ public class SnakeModel extends GameModel
 			}
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param pos The position to test.
 	 * @return <code>false</code> if the position is outside the playing field, <code>true</code> otherwise.
 	 */
