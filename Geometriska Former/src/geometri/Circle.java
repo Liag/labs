@@ -22,6 +22,10 @@ public class Circle extends GeometricalShape {
 	 public Circle( int x, int y, int radius, Color c )
 	           throws IllegalPositionException {
 		 super(x, y, c);
+			// if any coordinate is negative
+			if( x < 0 || y < 0 ) {
+				throw new IllegalPositionException();
+			}
 		 this.radius = radius;
 	 }
 	  
@@ -43,7 +47,6 @@ public class Circle extends GeometricalShape {
 	 */
 	@Override
 	public int area() {
-		// TODO Auto-generated method stub
 		return ( (int) ( Math.round( (radius * radius) * Math.PI )));
 	}
 
@@ -52,7 +55,6 @@ public class Circle extends GeometricalShape {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
 		g.setColor( super.getColor() );
 		g.fillOval( super.getX(), super.getY(), ( radius * 2 ) , ( radius * 2 ) );
 
@@ -63,11 +65,12 @@ public class Circle extends GeometricalShape {
 	 */
 	@Override
 	public int perimeter() {
-		// TODO Auto-generated method stub
 		return ( (int) ( Math.round( (2 * radius) * Math.PI )));
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,7 +79,9 @@ public class Circle extends GeometricalShape {
 		return result;
 	}
 
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -91,4 +96,11 @@ public class Circle extends GeometricalShape {
 		return true;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " Radius: " + radius;
+	}
 }

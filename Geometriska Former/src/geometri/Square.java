@@ -22,6 +22,10 @@ public class Square extends GeometricalShape {
 	public Square( int x, int y, int side, Color c )
 	           throws IllegalPositionException {
 		super(x, y, c);
+		// if any coordinate is negative
+		if( x < 0 || y < 0 ) {
+			throw new IllegalPositionException();
+		}
 		this.side = side;
 		  
 	}
@@ -39,9 +43,11 @@ public class Square extends GeometricalShape {
 		  this.side = side;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int area() {
-		// TODO Auto-generated method stub
 		return ( side * side );
 	}
 
@@ -50,7 +56,6 @@ public class Square extends GeometricalShape {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
 		g.setColor( super.getColor() );
 		g.fillRect( super.getX(), super.getY(), side, side );
 	}
@@ -60,10 +65,12 @@ public class Square extends GeometricalShape {
 	 */
 	@Override
 	public int perimeter() {
-		// TODO Auto-generated method stub
 		return ( 4 * side );
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,6 +79,9 @@ public class Square extends GeometricalShape {
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -86,6 +96,12 @@ public class Square extends GeometricalShape {
 		return true;
 	}
 	
-	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " Side: " + side;
+	}
 
 }

@@ -10,7 +10,7 @@ public class Line extends GeometricalShape{
 	private int y2;
 
 	/** The inclination of the line */
-	private int inclination;
+	private double inclination;
 	
 	/**
 	 * Construct a line from two positions and a color. 
@@ -25,10 +25,17 @@ public class Line extends GeometricalShape{
 	 */
 	public Line( int x1, int y1, int x2, int y2, Color c )
 	           throws IllegalPositionException {
-		super(x1, y1, c);
-		this.x2 = x2;
-		this.y2 = y2;
-		this.inclination = ( ( this.y2 - super.getY() ) / ( this.x2 - super.getX() ) );
+		super( Math.min(x1, x2), Math.min(y1, y2), c );
+		
+		// if any coordinate is negative
+		if(x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) {
+			throw new IllegalPositionException();
+		}
+		
+		this.x2 = Math.max(x1, x2);
+		this.y2 = Math.max(y1, y2);
+		
+		this.inclination = ( (double) ( y1 - y2 ) / ( x2 - x1 ) );
 	}
 	  
 	/**
@@ -39,9 +46,10 @@ public class Line extends GeometricalShape{
 	 * @param c The color of the line.
 	 */
 	public Line( GeometricalForm f1, GeometricalForm f2, Color c ) {
-		  super(f1, c);
-		  this.x2 = f2.getX();
-		  this.y2 = f2.getY();
+		  super( Math.min( f1.getX(), f2.getX() ), Math.min( f1.getY(), f2.getY() ), c);
+		  this.x2 = Math.max( f1.getX(), f2.getX() );
+		  this.y2 = Math.max( f1.getY(), f2.getY() );
+		  
 		  this.inclination = ( ( this.y2 - super.getY() ) / ( this.x2 - super.getX() ) );
 	}
 	
@@ -50,7 +58,6 @@ public class Line extends GeometricalShape{
 	 */
 	@Override
 	public int area() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -59,9 +66,14 @@ public class Line extends GeometricalShape{
 	 */
 	@Override
 	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
 		g.setColor( super.getColor() );
-		g.drawLine( super.getX(), super.getY(), x2, y2 );
+		// If the lines inclination is negative
+		if ( this.inclination < 0 ) {
+			g.drawLine( super.getX(), super.getY(), x2, y2 );
+		} else {
+			// if the lines inclination is positive
+			g.drawLine( super.getX(), this.y2, x2, super.getY() );
+		}
 	}
 	
 	/**
@@ -79,10 +91,14 @@ public class Line extends GeometricalShape{
     */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		// TODO Auto-generated method stub
 		super.move(dx, dy);
 		this.x2 += dx;
 		this.y2 += dy;
+		
+		// if x2 or y2 is negative
+		if(x2 < 0 || y2 < 0) {
+			throw new IllegalPositionException();
+		}
 	}
 	
    /**
@@ -101,8 +117,7 @@ public class Line extends GeometricalShape{
     *                                           is negative.
     */
 	@Override
-	public void place(int x, int y) throws IllegalPositionException {
-		// TODO Auto-generated method stub
+	public void place(int x, int y) throws IllegalPositionException {		
 		int x1 = super.getX();
 		int y1 = super.getY();
 		
@@ -119,25 +134,30 @@ public class Line extends GeometricalShape{
 	 */
 	@Override
 	public int perimeter() {
-		// TODO Auto-generated method stub
 		int xDiff = this.x2 - super.getX();
 		int yDiff = this.y2 - super.getY();
+		// the lines length
+		int lineLength =  (int) Math.round( Math.sqrt( Math.pow(xDiff, 2) + Math.pow(yDiff, 2) ) );
 		
-		int sideLength =  (int) Math.round( Math.sqrt( Math.pow(xDiff, 2) + Math.pow(yDiff, 2) ) );
-		
-		return sideLength;
+		return lineLength;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + inclination;
+		result = prime * result + (int) inclination;
 		result = prime * result + x2;
 		result = prime * result + y2;
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -156,6 +176,12 @@ public class Line extends GeometricalShape{
 		return true;
 	}
 	
-	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " X2: " + x2 + " Y2: " + y2;
+	}
 
 }

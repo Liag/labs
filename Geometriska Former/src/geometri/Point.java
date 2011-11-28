@@ -17,7 +17,10 @@ public class Point extends GeometricalShape {
 	public Point( int x, int y, Color c )
 	           throws IllegalPositionException {
 		super(x, y, c);
-		
+		// if any coordinate is negative
+		if( x < 0 || y < 0 ) {
+			throw new IllegalPositionException();
+		}
 	}
 	
 	/**
@@ -30,13 +33,11 @@ public class Point extends GeometricalShape {
 		super(f, c);
 	}
 	
-	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public int area() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -45,9 +46,8 @@ public class Point extends GeometricalShape {
 	 */
 	@Override
 	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
-		//g.setColor( super.getColor() );
-		//g.fillRect( super.getX(), super.getY(), 1, 1 );
+		g.setColor( super.getColor() );
+		g.fillRect( super.getX(), super.getY(), 1, 1 );
 	}
 
 	/**
@@ -55,10 +55,7 @@ public class Point extends GeometricalShape {
 	 */
 	@Override
 	public int perimeter() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
 
 }
