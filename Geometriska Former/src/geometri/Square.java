@@ -35,8 +35,8 @@ public class Square extends GeometricalShape {
 	 * @param c The color of the square.
 	 */
 	public Square( GeometricalForm f, int side, Color c ) {
-		  super(f, c);
-		  this.side = side;
+		super(f, c);
+		this.side = side;
 	}
 	
 	/**

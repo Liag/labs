@@ -76,11 +76,6 @@ public abstract class GeometricalShape implements GeometricalForm {
 	 */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		/*this.x += dx;
-		this.y += dy;
-		if ( this.x < 0 || this.y < 0 ) {
-			throw new IllegalPositionException();
-		}*/
 		place(this.x + dx, this.y + dy);
 	}
 	

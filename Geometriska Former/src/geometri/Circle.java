@@ -43,7 +43,7 @@ public class Circle extends GeometricalShape {
 	 */
 	@Override
 	public int area() {
-		return ( (int) ( Math.round( (radius * radius) * Math.PI )));
+		return ( (int) ( Math.round( (radius * radius) * Math.PI ) ) );
 	}
 
 	/**

@@ -27,11 +27,6 @@ public class Line extends GeometricalShape{
 	           throws IllegalPositionException {
 		super( Math.min(x1, x2), Math.min(y1, y2), c );
 		
-		// if any coordinate is negative
-		if(Math.max(x1, x2) < 0 || Math.max(y1, y2) < 0) {
-			throw new IllegalPositionException();
-		}
-		
 		this.x2 = Math.max(x1, x2);
 		this.y2 = Math.max(y1, y2);
 		
@@ -95,15 +90,6 @@ public class Line extends GeometricalShape{
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
 		place(super.getX() + dx, super.getY() + dy);
-		/*super.move(dx, dy);
-		//this.x2 += dx;
-		this.y2 += dy;*/
-		
-		// not needed?
-		/*// if x2 or y2 is negative
-		if(x2 < 0 || y2 < 0) {
-			throw new IllegalPositionException();
-		}*/
 	}
 	
    /**
