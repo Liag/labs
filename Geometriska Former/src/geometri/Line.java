@@ -35,7 +35,6 @@ public class Line extends GeometricalShape{
 		this.x2 = Math.max(x1, x2);
 		this.y2 = Math.max(y1, y2);
 		
-		System.out.println(toString());
 		// check if line's inclination is negative
 		this.negativeInclination = ( (double) ( y1 - y2 ) / ( x2 - x1 ) ) < 0 ? true : false;
 	}
@@ -164,11 +163,7 @@ public class Line extends GeometricalShape{
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
 		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
 			return false;
 		Line other = (Line) obj;
 		if (negativeInclination != other.negativeInclination)

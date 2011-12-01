@@ -22,10 +22,6 @@ public class Circle extends GeometricalShape {
 	 public Circle( int x, int y, int radius, Color c )
 	           throws IllegalPositionException {
 		 super(x, y, c);
-			// if any coordinate is negative
-			if( x < 0 || y < 0 ) {
-				throw new IllegalPositionException();
-			}
 		 this.radius = radius;
 	 }
 	  
@@ -84,12 +80,8 @@ public class Circle extends GeometricalShape {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
 		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		    return false;
 		Circle other = (Circle) obj;
 		if (radius != other.radius)
 			return false;

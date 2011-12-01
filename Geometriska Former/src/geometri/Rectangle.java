@@ -85,11 +85,7 @@ public class Rectangle extends GeometricalShape {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
 		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
 			return false;
 		Rectangle other = (Rectangle) obj;
 		if (height != other.height)

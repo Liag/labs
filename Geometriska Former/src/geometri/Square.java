@@ -22,7 +22,6 @@ public class Square extends GeometricalShape {
 	public Square( int x, int y, int side, Color c )
 	           throws IllegalPositionException {
 		super(x, y, c);
-		// if any coordinate is negative
 		this.side = side;
 		  
 	}
@@ -81,11 +80,7 @@ public class Square extends GeometricalShape {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
 		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
 			return false;
 		Square other = (Square) obj;
 		if (side != other.side)
