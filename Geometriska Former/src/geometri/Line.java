@@ -9,8 +9,8 @@ public class Line extends GeometricalShape{
 	private int x2;
 	private int y2;
 
-	/** The inclination of the line */
-	private double inclination;
+	/** The inclination of the line, if negative then true */
+	private boolean negativeInclination;
 	
 	/**
 	 * Construct a line from two positions and a color. 
@@ -28,14 +28,15 @@ public class Line extends GeometricalShape{
 		super( Math.min(x1, x2), Math.min(y1, y2), c );
 		
 		// if any coordinate is negative
-		if(x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) {
+		if(Math.max(x1, x2) < 0 || Math.max(y1, y2) < 0) {
 			throw new IllegalPositionException();
 		}
 		
 		this.x2 = Math.max(x1, x2);
 		this.y2 = Math.max(y1, y2);
 		
-		this.inclination = ( (double) ( y1 - y2 ) / ( x2 - x1 ) );
+		// check if line's inclination is negative
+		this.negativeInclination = ( (double) ( y1 - y2 ) / ( x2 - x1 ) ) < 0 ? true : false;
 	}
 	  
 	/**
@@ -44,13 +45,15 @@ public class Line extends GeometricalShape{
 	 * @param f1 Form with coordinates for first position.
 	 * @param f2 Form with coordinates for second position.
 	 * @param c The color of the line.
+	 * @throws IllegalPositionException 
 	 */
-	public Line( GeometricalForm f1, GeometricalForm f2, Color c ) {
+	public Line( GeometricalForm f1, GeometricalForm f2, Color c ) throws IllegalPositionException {
 		  super( Math.min( f1.getX(), f2.getX() ), Math.min( f1.getY(), f2.getY() ), c);
 		  this.x2 = Math.max( f1.getX(), f2.getX() );
 		  this.y2 = Math.max( f1.getY(), f2.getY() );
-		  
-		  this.inclination = ( ( this.y2 - super.getY() ) / ( this.x2 - super.getX() ) );
+		
+		  // check if line's inclination is negative
+		  this.negativeInclination = ( ( this.y2 - super.getY() ) / ( this.x2 - super.getX() ) ) < 0 ? true : false;
 	}
 	
 	/**
@@ -68,7 +71,7 @@ public class Line extends GeometricalShape{
 	public void fill(Graphics g) {
 		g.setColor( super.getColor() );
 		// If the lines inclination is negative
-		if ( this.inclination < 0 ) {
+		if ( this.negativeInclination ) {
 			g.drawLine( super.getX(), super.getY(), x2, y2 );
 		} else {
 			// if the lines inclination is positive
@@ -95,10 +98,11 @@ public class Line extends GeometricalShape{
 		this.x2 += dx;
 		this.y2 += dy;
 		
-		// if x2 or y2 is negative
+		// not needed?
+		/*// if x2 or y2 is negative
 		if(x2 < 0 || y2 < 0) {
 			throw new IllegalPositionException();
-		}
+		}*/
 	}
 	
    /**
@@ -149,9 +153,7 @@ public class Line extends GeometricalShape{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + (int) inclination;
-		result = prime * result + x2;
-		result = prime * result + y2;
+		result = prime * result + (negativeInclination ? 1231 : 1237);
 		return result;
 	}
 
@@ -167,15 +169,11 @@ public class Line extends GeometricalShape{
 		if (getClass() != obj.getClass())
 			return false;
 		Line other = (Line) obj;
-		if (inclination != other.inclination)
-			return false;
-		if (x2 != other.x2)
-			return false;
-		if (y2 != other.y2)
+		if (negativeInclination != other.negativeInclination)
 			return false;
 		return true;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

@@ -11,7 +11,12 @@ public abstract class GeometricalShape implements GeometricalForm {
 	/** The object's color */
 	private Color color;
 	
-	public GeometricalShape ( int x, int y, Color c) {
+	public GeometricalShape ( int x, int y, Color c) 
+			throws IllegalPositionException {
+		// if any coordinate is negative
+		if( x < 0 || y < 0 ) {
+			throw new IllegalPositionException();
+		}
 		this.x = x;
 		this.y = y;
 		this.color = c;
@@ -71,11 +76,12 @@ public abstract class GeometricalShape implements GeometricalForm {
 	 */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		this.x += dx;
+		/*this.x += dx;
 		this.y += dy;
 		if ( this.x < 0 || this.y < 0 ) {
 			throw new IllegalPositionException();
-		}
+		}*/
+		place(this.x + dx, this.y + dy);
 	}
 	
 	/**
@@ -91,6 +97,14 @@ public abstract class GeometricalShape implements GeometricalForm {
 	}
 
 	/**
+	 * Returns a string representation of the object.
+	 */
+	@Override
+	public String toString() {
+		return "Color: " + color + " X: " + x + " Y: " + y;
+	}
+
+	/**
 	 * Returns a hash code value for the object.
 	 */
 	@Override
@@ -98,8 +112,6 @@ public abstract class GeometricalShape implements GeometricalForm {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + x;
-		result = prime * result + y;
 		return result;
 	}
 
@@ -120,19 +132,7 @@ public abstract class GeometricalShape implements GeometricalForm {
 				return false;
 		} else if (!color.equals(other.color))
 			return false;
-		if (x != other.x)
-			return false;
-		if (y != other.y)
-			return false;
 		return true;
-	}
-
-	/**
-	 * Returns a string representation of the object.
-	 */
-	@Override
-	public String toString() {
-		return "Color: " + color + " X: " + x + " Y: " + y;
 	}
 	
 	
