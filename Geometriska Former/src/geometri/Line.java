@@ -35,6 +35,7 @@ public class Line extends GeometricalShape{
 		this.x2 = Math.max(x1, x2);
 		this.y2 = Math.max(y1, y2);
 		
+		System.out.println(toString());
 		// check if line's inclination is negative
 		this.negativeInclination = ( (double) ( y1 - y2 ) / ( x2 - x1 ) ) < 0 ? true : false;
 	}
@@ -48,7 +49,7 @@ public class Line extends GeometricalShape{
 	 * @throws IllegalPositionException 
 	 */
 	public Line( GeometricalForm f1, GeometricalForm f2, Color c ) throws IllegalPositionException {
-		  super( Math.min( f1.getX(), f2.getX() ), Math.min( f1.getY(), f2.getY() ), c);
+		  super( Math.min( f1.getX(), f2.getX()), Math.min(f1.getY(), f2.getY()), c);
 		  this.x2 = Math.max( f1.getX(), f2.getX() );
 		  this.y2 = Math.max( f1.getY(), f2.getY() );
 		
@@ -94,9 +95,10 @@ public class Line extends GeometricalShape{
     */
 	@Override
 	public void move(int dx, int dy) throws IllegalPositionException {
-		super.move(dx, dy);
-		this.x2 += dx;
-		this.y2 += dy;
+		place(super.getX() + dx, super.getY() + dy);
+		/*super.move(dx, dy);
+		//this.x2 += dx;
+		this.y2 += dy;*/
 		
 		// not needed?
 		/*// if x2 or y2 is negative
