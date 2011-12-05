@@ -1,6 +1,6 @@
-package orig2011.v2;
+package orig2011.v3;
 
-import orig2011.v0.GameTile;
+
 import orig2011.v0.Position;
 
 // The dummy declaration below is not needed anymore since we have generalized
@@ -40,8 +40,7 @@ public enum GameUtils {
 	
 	public static void setGameboardState(final Position pos, final GameTile tile, 
 			GameTile[][] tiles) {
-		tiles[pos.getX()][pos.getY()] = tile;
-		
+		tiles[pos.getX()][pos.getY()] = tile;		
 	}
 	
 	public static void setGameboardState(final int x, final int y,

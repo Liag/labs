@@ -1,12 +1,14 @@
-package orig2011.v2;
+package orig2011.v3;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
-import orig2011.v0.*;
-import orig2011.v3.GameUtils;
-import orig2011.v3.ReversiModel.PieceColor;
+import orig2011.v0.GameOverException;
+import orig2011.v0.Position;
+import orig2011.v0.Constants;
+
+
 
 /**
  * A somewhat defective implementation of the game Reversi. The purpose
@@ -117,7 +119,7 @@ public class ReversiModel implements GameModel {
 		// Insert the collector in the middle of the gameboard.
 		this.cursorPos = new Position(midX, midY);
 		//TODO remove
-		System.out.println("Reversimodel in orig2011.v2");
+		System.out.println("Reversimodel in orig2011.v3");
 	}
 
 	/**

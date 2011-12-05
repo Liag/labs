@@ -10,6 +10,7 @@ import orig2011.v0.Constants;
 import orig2011.v0.GameOverException;
 import orig2011.v0.Position;
 
+
 /**
  * Sample game for illustration. Intentionally stupid; more interesting
  * games to be provided by students.
@@ -95,7 +96,9 @@ public class GoldModel implements GameModel {
 	public GoldModel() {
 		Dimension size = Constants.getGameSize();
 		// create a new gameboard and fill it with BLANK_TILE
-		board = GameUtils.newBoard(BLANK_TILE, size.width, size.height);
+		//board = GameUtils.newBoard(BLANK_TILE, size.width, size.height);
+		board = new GameTile[size.width][size.height];
+		GameUtils.fillBoard(board, BLANK_TILE);
 
 		// Insert the collector in the middle of the gameboard.
 		this.collectorPos = new Position(size.width / 2, size.height / 2);
