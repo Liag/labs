@@ -1,5 +1,8 @@
 package orig2011.v2;
 
+//import orig2011.v0.*;
+//import orig2011.v1.*;
+
 /**
  * Factory interface for available games.
  */

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import orig2011.v0.*;
+import orig2011.v1.*;
+
 
 /**
  * Sample game for illustration. Intentionally stupid; more interesting
@@ -85,28 +87,26 @@ public class GoldModel implements GameModel {
 
 	/** The number of coins found. */
 	private int score;
-
+	
+	private GameTile board[][];
 	/**
 	 * Create a new model for the gold game.
 	 */
 	public GoldModel() {
-		Dimension size = GameUtils.getGameboardSize();
-
-		// Blank out the whole gameboard
-		for (int i = 0; i < size.width; i++) {
-			for (int j = 0; j < size.height; j++) {
-				setGameboardState(i, j, BLANK_TILE);
-			}
-		}
+		Dimension size = Constants.getGameSize();
+		// create a new gameboard and fill it with BLANK_TILE
+		board = GameUtils.newBoard(BLANK_TILE, size.width, size.height);
 
 		// Insert the collector in the middle of the gameboard.
 		this.collectorPos = new Position(size.width / 2, size.height / 2);
-		setGameboardState(this.collectorPos, COLLECTOR_TILE);
-
+		GameUtils.setGameboardState(collectorPos, COLLECTOR_TILE, board);
+		
 		// Insert coins into the gameboard.
 		for (int i = 0; i < COIN_START_AMOUNT; i++) {
 			addCoin();
 		}
+		// TODO remove
+		System.out.println("GoldModel in orig2011.v2");
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class GoldModel implements GameModel {
 	 */
 	private void addCoin() {
 		Position newCoinPos;
-		Dimension size = GameUtils.getGameboardSize();
+		Dimension size = Constants.getGameSize();
 		// Loop until a blank position is found and ...
 		do {
 			newCoinPos = new Position((int) (Math.random() * size.width),
@@ -122,7 +122,7 @@ public class GoldModel implements GameModel {
 		} while (!isPositionEmpty(newCoinPos));
 
 		// ... add a new coin to the empty tile.
-		setGameboardState(newCoinPos, COIN_TILE);
+		GameUtils.setGameboardState(newCoinPos, COIN_TILE, board);
 		this.coins.add(newCoinPos);
 	}
 
@@ -182,7 +182,7 @@ public class GoldModel implements GameModel {
 		updateDirection(lastKey);
 
 		// Erase the previous position.
-		setGameboardState(this.collectorPos, BLANK_TILE);
+		GameUtils.setGameboardState(this.collectorPos, BLANK_TILE, this.board);
 		// Change collector position.
 		this.collectorPos = getNextCollectorPos();
 
@@ -190,7 +190,7 @@ public class GoldModel implements GameModel {
 			throw new GameOverException(this.score);
 		}
 		// Draw collector at new position.
-		setGameboardState(this.collectorPos, COLLECTOR_TILE);
+		GameUtils.setGameboardState(this.collectorPos, COLLECTOR_TILE, this.board);
 
 		// Remove the coin at the new collector position (if any)
 		if (this.coins.remove(this.collectorPos)) {
@@ -205,7 +205,7 @@ public class GoldModel implements GameModel {
 		// Remove one of the coins
 		Position oldCoinPos = this.coins.get(0);
 		this.coins.remove(0);
-		setGameboardState(oldCoinPos, BLANK_TILE);
+		GameUtils.setGameboardState(oldCoinPos, BLANK_TILE, this.board);
 
 		// Add a new coin (simulating moving one coin)
 		addCoin();
@@ -218,34 +218,19 @@ public class GoldModel implements GameModel {
 	 * @return <code>false</code> if the position is outside the playing field, <code>true</code> otherwise.
 	 */
 	private boolean isOutOfBounds(Position pos) {
-		return pos.getX() < 0 || pos.getX() >= getGameboardSize().width
-				|| pos.getY() < 0 || pos.getY() >= getGameboardSize().height;
+		return pos.getX() < 0 || pos.getX() >= Constants.getGameSize().width
+				|| pos.getY() < 0 || pos.getY() >= Constants.getGameSize().height;
 	}
 
 	@Override
-	public void setGameboardState(Position pos, GameTile tile,
-			GameTile[][] tiles) {
-		// TODO Auto-generated method stub
-		
+	public GameTile getGameboardState(Position pos) {
+		return this.board[pos.getX()][pos.getY()];
 	}
 
 	@Override
-	public void setGameboardState(int x, int y, GameTile tile,
-			GameTile[][] tiles) {
-		// TODO Auto-generated method stub
-		
+	public GameTile getGameboardState(int x, int y) {
+		return this.board[x][y];
 	}
 
-	@Override
-	public GameTile getGameboardState(Position pos, GameTile[][] tiles) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GameTile getGameboardState(int x, int y, GameTile[][] tiles) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
