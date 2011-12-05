@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
 import orig2011.v0.*;
-import orig2011.v1.*;
 
 /**
  * A somewhat defective implementation of the game Reversi. The purpose

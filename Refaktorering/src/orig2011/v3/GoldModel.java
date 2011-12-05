@@ -1,4 +1,4 @@
-package orig2011.v2;
+package orig2011.v3;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,8 +6,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import orig2011.v0.*;
-
+import orig2011.v0.Constants;
+import orig2011.v0.GameOverException;
+import orig2011.v0.Position;
 
 /**
  * Sample game for illustration. Intentionally stupid; more interesting
@@ -65,7 +66,7 @@ public class GoldModel implements GameModel {
 			Color.RED, 2.0);
 
 	/** Graphical representation of a blank tile. */
-	private static final GameTile BLANK_TILE = new GameTile();
+	private static final GameTile BLANK_TILE = new BlankTile();
 
 	/** A list containing the positions of all coins. */
 	private final List<Position> coins = new ArrayList<Position>();
@@ -105,7 +106,7 @@ public class GoldModel implements GameModel {
 			addCoin();
 		}
 		// TODO remove
-		System.out.println("GoldModel in orig2011.v2");
+		System.out.println("GoldModel in orig2011.v3");
 	}
 
 	/**

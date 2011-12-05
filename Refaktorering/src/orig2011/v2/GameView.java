@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import orig2011.v0.*;
-import orig2011.v1.*;
 
 import javax.swing.JComponent;
 

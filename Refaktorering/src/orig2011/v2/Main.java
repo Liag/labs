@@ -1,8 +1,5 @@
 package orig2011.v2;
 
-import orig2011.v0.*;
-import orig2011.v1.*;
-
 import javax.swing.JFrame;
 
 /**

@@ -9,9 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import orig2011.v0.*;
-import orig2011.v1.*;
-
 /**
  * This panel is meant to be the base of a window or applet. It will add a new
  * GameView with a corresponding GameController to itself. It will also provide
