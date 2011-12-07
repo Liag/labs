@@ -1,7 +1,9 @@
-package orig2011.v4;
+package orig2011.v6;
 
 import orig2011.v0.*;
 import orig2011.v3.GameTile;
+import orig2011.v4.*;
+
 
 /**
  * Common superclass for all game model classes.
@@ -36,4 +38,6 @@ public interface GameModel extends IObservable {
 	 *            The most recent keystroke.
 	 */
 	public abstract void gameUpdate(int lastKey) throws GameOverException;
+	
+	public int getUpdateSpeed();
 }

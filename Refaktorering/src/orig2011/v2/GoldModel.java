@@ -93,9 +93,8 @@ public class GoldModel implements GameModel {
 	 * Create a new model for the gold game.
 	 */
 	public GoldModel() {
-		Dimension size = Constants.getGameSize();
+		Dimension size = GameUtils.getGameboardSize();
 		// create a new gameboard and fill it with BLANK_TILE
-		//board = GameUtils.newBoard(BLANK_TILE, size.width, size.height);
 		board = new GameTile[size.width][size.height];
 		GameUtils.fillBoard(board, BLANK_TILE);
 

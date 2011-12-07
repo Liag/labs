@@ -92,11 +92,10 @@ public class ReversiModel implements GameModel {
 	private boolean gameOver;
 
 	public ReversiModel() {
-		this.width = Constants.getGameSize().width;
-		this.height = Constants.getGameSize().height;
+		this.width = GameUtils.getGameboardSize().width;
+		this.height = GameUtils.getGameboardSize().height;
 		
 		// create a new gameboard and make all tiles empty
-		//this.board = GameUtils.newBoard(PieceColor.EMPTY, this.width, this.height);
 		this.board = new PieceColor[this.width][this.height];
 		GameUtils.fillBoard(board, PieceColor.EMPTY);
 		

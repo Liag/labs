@@ -1,14 +1,18 @@
-package orig2011.v3;
+package orig2011.v6;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
 import orig2011.v0.Constants;
 import orig2011.v0.GameOverException;
 import orig2011.v0.Position;
+import orig2011.v3.GameTile;
+import orig2011.v3.*;
 
 
 /**
@@ -90,11 +94,15 @@ public class GoldModel implements GameModel {
 	private int score;
 	
 	private GameTile board[][];
+	
+	//TODO something
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
 	/**
 	 * Create a new model for the gold game.
 	 */
 	public GoldModel() {
-		Dimension size = GameUtils.getGameboardSize();
+		Dimension size = Constants.getGameSize();
 		// create a new gameboard and fill it with BLANK_TILE
 		board = new GameTile[size.width][size.height];
 		GameUtils.fillBoard(board, BLANK_TILE);
@@ -107,8 +115,9 @@ public class GoldModel implements GameModel {
 		for (int i = 0; i < COIN_START_AMOUNT; i++) {
 			addCoin();
 		}
+		
 		// TODO remove
-		System.out.println("GoldModel in orig2011.v3");
+		System.out.println("GoldModel in orig2011.v4");
 	}
 
 	/**
@@ -185,6 +194,7 @@ public class GoldModel implements GameModel {
 
 		// Erase the previous position.
 		GameUtils.setGameboardState(this.collectorPos, BLANK_TILE, this.board);
+		
 		// Change collector position.
 		this.collectorPos = getNextCollectorPos();
 
@@ -211,7 +221,6 @@ public class GoldModel implements GameModel {
 
 		// Add a new coin (simulating moving one coin)
 		addCoin();
-
 	}
 
 	/**
@@ -234,5 +243,21 @@ public class GoldModel implements GameModel {
 		return this.board[x][y];
 	}
 
+	@Override
+	public void addObserver(PropertyChangeListener observer) {
+		this.pcs.addPropertyChangeListener(observer);
+		
+	}
+
+	@Override
+	public void removeObserver(PropertyChangeListener observer) {
+		this.pcs.removePropertyChangeListener(observer);
+	}
+
+	@Override
+	public int getUpdateSpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }
