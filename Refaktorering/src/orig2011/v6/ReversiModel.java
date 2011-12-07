@@ -96,6 +96,8 @@ public class ReversiModel implements GameModel {
 	
 	//TODO something
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	
+	private int updateSpeed = -1;
 
 	public ReversiModel() {
 		this.width = Constants.getGameSize().width;
@@ -125,7 +127,7 @@ public class ReversiModel implements GameModel {
 		this.cursorPos = new Position(midX, midY);
 		
 		//TODO remove
-		System.out.println("Reversimodel in orig2011.v4");
+		System.out.println("Reversimodel in orig2011.v6");
 	}
 
 	/**
@@ -408,8 +410,7 @@ public class ReversiModel implements GameModel {
 
 	@Override
 	public int getUpdateSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.updateSpeed;
 	}	
 
 }

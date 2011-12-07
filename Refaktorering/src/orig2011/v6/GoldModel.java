@@ -98,6 +98,8 @@ public class GoldModel implements GameModel {
 	//TODO something
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	
+	private int updateSpeed = 150;
+	
 	/**
 	 * Create a new model for the gold game.
 	 */
@@ -117,7 +119,7 @@ public class GoldModel implements GameModel {
 		}
 		
 		// TODO remove
-		System.out.println("GoldModel in orig2011.v4");
+		System.out.println("GoldModel in orig2011.v6");
 	}
 
 	/**
@@ -256,8 +258,7 @@ public class GoldModel implements GameModel {
 
 	@Override
 	public int getUpdateSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.updateSpeed;
 	}
 
 }

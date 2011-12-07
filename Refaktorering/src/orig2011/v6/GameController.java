@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import orig2011.v0.GameOverException;
-import orig2011.v5.GameView;
 
 
 /**
@@ -24,7 +23,7 @@ public class GameController implements Runnable {
 	private GameModel gameModel;
 
 	/** The timeout interval between each update. (millis) */
-	private final int updateInterval;
+	private int updateInterval;
 
 	/** True when game is running. */
 	private boolean isRunning;
@@ -64,13 +63,7 @@ public class GameController implements Runnable {
 			@SuppressWarnings("synthetic-access")
 			@Override
 			public void keyPressed(final KeyEvent event) {
-				if( gameModel.getUpdateSpeed() <= 0) {
-					int keyCode = event.getKeyCode();
-					gameModel.gameUpdate( keyCode );
-				} else {
 					enqueueKeyPress(event.getKeyCode());
-				}
-				
 			}
 		};
 
@@ -80,7 +73,11 @@ public class GameController implements Runnable {
 	 * Add a key press to the end of the queue
 	 */
 	private synchronized void enqueueKeyPress(final int key) {
-		this.keypresses.add(Integer.valueOf(key));
+		if( gameModel.getUpdateSpeed() < 0) {
+			noTimerUpdate(key);	
+		} else {
+			this.keypresses.add(Integer.valueOf(key));
+		}		
 	}
 
 	/**
@@ -116,11 +113,16 @@ public class GameController implements Runnable {
 
 		// Actually start the game
 		this.gameModel = gameModel;
+		this.updateInterval = gameModel.getUpdateSpeed();
 		this.isRunning = true;
 
 		// Create the new thread and start it...
 		this.gameThread = new Thread(this);
-		this.gameThread.start();
+		
+		if ( this.updateInterval > 0 ) {
+			this.gameThread.start();
+		}
+		
 	}
 
 	/**
@@ -173,6 +175,16 @@ public class GameController implements Runnable {
 				// if we get this exception, we're asked to terminate ourselves
 				this.isRunning = false;
 			}
+		}
+	}
+	
+	//TODO javadoc
+	public void noTimerUpdate( final int keyPress) {
+		try {
+			this.gameModel.gameUpdate(keyPress);
+		} catch (GameOverException e) {
+			// print score
+			System.out.println("Game over: " + e.getScore());
 		}
 	}
 }
