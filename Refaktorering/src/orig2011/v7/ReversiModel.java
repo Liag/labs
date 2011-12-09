@@ -409,6 +409,9 @@ public class ReversiModel implements GameModel {
 	}
 
 	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public int getUpdateSpeed() {
 		return this.updateSpeed;
 	}	

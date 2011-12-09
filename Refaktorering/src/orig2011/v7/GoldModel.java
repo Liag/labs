@@ -257,6 +257,9 @@ public class GoldModel implements GameModel {
 	}
 
 	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public int getUpdateSpeed() {
 		return this.updateSpeed;
 	}
