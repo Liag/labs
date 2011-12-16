@@ -31,7 +31,7 @@ public class Line extends GeometricalShape{
 		this.y2 = Math.max(y1, y2);
 		
 		// check if line's inclination is negative
-		this.negativeInclination = ( (double) ( y1 - y2 ) / ( x2 - x1 ) ) < 0 ? true : false;
+		this.negativeInclination = ( (double) ( y1 - y2 ) / ( x2 - x1 ) ) < 0;
 	}
 	  
 	/**
@@ -48,7 +48,7 @@ public class Line extends GeometricalShape{
 		  this.y2 = Math.max( f1.getY(), f2.getY() );
 		
 		  // check if line's inclination is negative
-		  this.negativeInclination = ( ( this.y2 - super.getY() ) / ( this.x2 - super.getX() ) ) < 0 ? true : false;
+		  this.negativeInclination = ( ( this.y2 - super.getY() ) / ( this.x2 - super.getX() ) ) < 0;
 	}
 	
 	/**
@@ -154,6 +154,10 @@ public class Line extends GeometricalShape{
 		Line other = (Line) obj;
 		if (negativeInclination != other.negativeInclination)
 			return false;
+		if ( ( this.y2 - super.getY() ) != ( other.y2 - other.getY() ) || 
+				( this.x2 - super.getX() ) != ( other.x2 - other.getX() ) )
+			return false;
+		
 		return true;
 	}
 
